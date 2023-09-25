@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    use HasFactory;
+	protected $fillable = ['name', 'publication_year', 'available'];
+
+    public function authors()
+    {
+        return $this->belongsTo(Author::class);
+    }
 }
