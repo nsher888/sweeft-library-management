@@ -10,6 +10,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($authors) > 0)
                 @foreach ($authors as $author)
                 <tr>
                     <td class="px-6 py-4">{{ $author->name }}</td>
@@ -17,6 +18,11 @@
 
                 </tr>
                 @endforeach
+                @else
+                <tr>
+                    <td colspan="2" class="px-6 py-4">No authors found.</td>
+                </tr>
+                @endif
             </tbody>
         </table>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,16 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/books', [BookController::class, 'store'])->name('books.store');
+Route::controller(BookController::class)->group(function () {
+	Route::get('/', 'index')->name('books.index');
+	Route::view('/books/create', 'books.create')->name('books.create');
+	Route::post('/books', 'store')->name('books.store');
+	Route::get('/books/{book}/edit', 'edit')->name('books.edit');
+	Route::put('/books/{book}', 'update')->name('books.update');
+	Route::delete('/books/{book}', 'destroy')->name('books.destroy');
+});
 
-Route::get('/', [BookController::class, 'index'])->name('index');
-Route::view('/dashboard/store', 'dashboard.store')->name('dashboard.store');
-
-Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
-Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update');
-Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
-
-
-Route::get('/dashboard/authors', [BookController::class, 'authorsIndex'])->name('dashboard.authors');
-
-Route::delete('/authors/{author}', [BookController::class, 'destroyAuthor'])->name('authors.destroy');
+Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');

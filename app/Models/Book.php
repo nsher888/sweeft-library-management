@@ -8,8 +8,8 @@ class Book extends Model
 {
 	protected $fillable = ['name', 'publication_year', 'available'];
 
-    public function authors()
-    {
-        return $this->belongsToMany(Author::class);
-    }
+	public function authors()
+	{
+		return $this->belongsToMany(Author::class);
+	}
 }
